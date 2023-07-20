@@ -62,13 +62,14 @@ public class StudentServices {
         return studentRepository.findById(studentId).orElse(null);
     }
 
-    public Student updateStudent(Long studentId, String name, String lastName) {
+    public Student updateStudent(Long studentId, String name, String lastName, String email) {
         Student updateByStudent = getStudentById(studentId);
         if (updateByStudent == null) {
             return null;
         }
         updateByStudent.setLastName(lastName);
         updateByStudent.setName(name);
+        updateByStudent.setEmail(email);
         studentRepository.save(updateByStudent);
         return updateByStudent;
     }

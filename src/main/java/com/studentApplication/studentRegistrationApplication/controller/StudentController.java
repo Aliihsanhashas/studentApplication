@@ -52,9 +52,10 @@ public class StudentController {
     @PutMapping("{studentId}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long studentId,
                                                  @RequestParam String name,
-                                                 @RequestParam String lastName) {
+                                                 @RequestParam String lastName,
+                                                 @RequestParam String email) {
 
-        return ResponseEntity.ok(studentServices.updateStudent(studentId, name, lastName));
+        return ResponseEntity.ok(studentServices.updateStudent(studentId, name, lastName, email));
     }
 
 
