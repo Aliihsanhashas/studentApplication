@@ -2,9 +2,12 @@ package com.studentApplication.studentRegistrationApplication.controller;
 
 import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
 import com.studentApplication.studentRegistrationApplication.dto.StudentResponseDto;
+import com.studentApplication.studentRegistrationApplication.exception.StudentErrorResponse;
+import com.studentApplication.studentRegistrationApplication.exception.StudentNotFoundException;
 import com.studentApplication.studentRegistrationApplication.model.Student;
 import com.studentApplication.studentRegistrationApplication.service.StudentServices;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +42,11 @@ public class StudentController {
 
     @GetMapping("/getstudentid/{studentId}")
     public ResponseEntity<Student> getStudentId(@PathVariable("studentId") Long studentId) {
+
+        if (studentId >= studentServices.getStudents().size() || studentId < 0) {
+            throw new StudentNotFoundException("Student is not found - " + studentId);
+        }
+
         return ResponseEntity.ok(studentServices.getStudentById(studentId));
 
     }
@@ -66,6 +74,7 @@ public class StudentController {
 
     @GetMapping("/findbylastname/{lastName}")
     public ResponseEntity<Student> findByLastName(@PathVariable String lastName) {
+
         return ResponseEntity.ok(studentServices.findByLastName(lastName));
     }
 
@@ -78,6 +87,5 @@ public class StudentController {
     public ResponseEntity<Student> findByName(@PathVariable String name) {
         return ResponseEntity.ok(studentServices.findByName(name));
     }
-
 
 }
