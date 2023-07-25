@@ -1,6 +1,8 @@
 package com.studentApplication.studentRegistrationApplication.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 //Bir sınıfı @Entity ile işaretlediğinizde, Hibernate bu sınıfı bir veritabanı tablosuna eşleyebilir
 // ve tablo ile nesne arasında bir ilişki kurabilir.
@@ -25,8 +27,12 @@ public class Student {
             generator = "student_squence"
     )
     private Long id;
+    @NotBlank(message = "Must be not null.")
     private String name;
+    @NotBlank(message = "Must be not null.")
     private String lastName;
+    @Email(message = "Email shoul be valid.")
+    @NotBlank(message = "Must be not null.")
     private String email;
 
     public Student() {

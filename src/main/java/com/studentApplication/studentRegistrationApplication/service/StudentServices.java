@@ -8,7 +8,6 @@ import com.studentApplication.studentRegistrationApplication.repository.StudentR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,9 +24,6 @@ public class StudentServices {
     }
 
     public List<StudentResponseDto> getStudents() {   //getAll student
-        if (true) {
-            throw new RuntimeException();
-        }
 
         return studentRepository.findAll()
                 .stream()// TODO learn java stream api
@@ -48,7 +44,6 @@ public class StudentServices {
 
     public Student addNewStudent(StudentRequestDto studentRequestDto) {
         Student student = new Student();
-
 
 
         student.setName(studentRequestDto.getName());
@@ -80,15 +75,15 @@ public class StudentServices {
         return studentRepository.save(updateByStudent);
     }
 
-    public Student findByLastName(String lastName) { // TODO add StudentNotFoundException
-        return studentRepository.findByLastName(lastName);
+    public Student findByLastNameOrElseThrowException(String lastName) {
+        return studentRepository.findByLastName(lastName).orElseThrow(() -> new StudentNotFoundException("user not found by id: " + lastName));
     }
 
-    public Student findByEmail(String email) { // TODO add StudentNotFoundException
-        return studentRepository.findByEmail(email);
+    public Student findByEmailOrElseThrowException(String email) {
+        return studentRepository.findByEmail(email).orElseThrow(() -> new StudentNotFoundException("user not found by id: " + email));
     }
 
-    public Student findByName(String name) { // TODO add StudentNotFoundException
-        return studentRepository.findByName(name);
+    public Student findByNameOrElseThrowException(String name) {
+        return studentRepository.findByName(name).orElseThrow(() -> new StudentNotFoundException("user not found by id: " + name));
     }
 }
