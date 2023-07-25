@@ -35,22 +35,28 @@ public class Student {
     @NotBlank(message = "Must be not null.")
     private String email;
 
+    @ManyToOne
+    private Lesson lesson;
+
+
     public Student() {
 
     }
 
-    public Student(String name, String lastName, String email) {
+    public Student(String name, String lastName, String email, Lesson lesson) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.lesson = lesson;
 
     }
 
-    public Student(Long id, String name, String lastName, String email) {
+    public Student(Long id, String name, String lastName, String email, Lesson lesson) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.lesson = lesson;
     }
 
     public Long getId() {
@@ -83,6 +89,14 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 
     @Override

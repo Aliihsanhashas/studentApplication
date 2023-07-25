@@ -1,6 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table
@@ -17,18 +18,27 @@ public class Lesson {
     )
 
     private Long id;
+    @NotBlank
     private String name;
-    private String teacher;
+    @NotBlank
     private int credits;
+    @OneToOne
+    private Teacher teacher;
 
     public Lesson() {
-
     }
 
-    public Lesson(String name, String teacher, int credits) {
+    public Lesson(String name, int credits, Teacher teacher) {
         this.name = name;
-        this.teacher = teacher;
         this.credits = credits;
+        this.teacher = teacher;
+    }
+
+    public Lesson(Long id, String name, int credits, Teacher teacher) {
+        this.id = id;
+        this.name = name;
+        this.credits = credits;
+        this.teacher = teacher;
     }
 
     public Long getId() {
@@ -47,19 +57,19 @@ public class Lesson {
         this.name = name;
     }
 
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
-    }
-
     public int getCredits() {
         return credits;
     }
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
