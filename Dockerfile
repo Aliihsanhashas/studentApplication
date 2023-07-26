@@ -1,6 +1,8 @@
-FROM openjdk:11
-WORKDIR /app
+FROM maven:3.8.2-jdk-11-slim
+WORKDIR /.
 ENV PORT 8080
 EXPOSE 8080
-ADD target/studentRegistrationApplication-0.0.1-SNAPSHOT.jar studentRegistrationApplication-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java", "-jar", "studentRegistrationApplication-0.0.1-SNAPSHOT.jar"]
+COPY . .
+CMD sleep 15
+RUN mvn clean install
+CMD mvn spring-boot:run
