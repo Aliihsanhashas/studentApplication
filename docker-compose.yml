@@ -6,7 +6,7 @@ services:
     environment:
       MYSQL_DATABASE: 'database'
       # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'root'
+      MYSQL_USER: 'ali'
       # You can use whatever password you like
       MYSQL_PASSWORD: '314159'
       # Password for root access
@@ -18,11 +18,12 @@ services:
       # Opens port 3306 on the container
       - '3306'
       # Where our data will be persisted
-    volumes:
-      - my-db:/var/lib/mysql
     networks:
       - common_network
   web:
+    environment:
+      MYSQL_CONNECTION_URL: 'jdbc:mysql://db:3306/student?useSSL=false'
+
     build: .
     ports:
       - '8080:8080'
@@ -32,8 +33,6 @@ services:
       - db
     command: ["sleep", "40"]
       # Names our volume
-volumes:
-  my-db:
 networks:
   common_network:
     driver: bridge

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class StudentApplication {
 
 	public static void main(String[] args) throws InterruptedException {
-		System.out.println("asdasd");
+		System.out.println("this is new version ");
 		TimeUnit.SECONDS.sleep(30);
 		SpringApplication.run(StudentApplication.class, args);
 
