@@ -43,13 +43,12 @@ public class StudentController {
 
     @PutMapping("{studentId}")
     public ResponseEntity<ApiResponse<Object>> updateStudent(@PathVariable Long studentId,
-                                                             @RequestParam String name, // TODO conver to StudentRequestDto
+                                                             @RequestParam String name,   // TODO conver to StudentRequestDto
                                                              @RequestParam String lastName,
                                                              @RequestParam String email) {
 
-        return ResponseEntity.ok(new ApiResponse<>(studentServices.updateStudent(studentId, name, lastName, email),"update student."));
+        return ResponseEntity.ok(new ApiResponse<>(studentServices.updateStudent(studentId, name, lastName, email), "update student."));
     }
-
 
     @DeleteMapping("/{studentId}")
     public ResponseEntity<ApiResponse<Object>> deleteStudent(@PathVariable Long studentId) {
