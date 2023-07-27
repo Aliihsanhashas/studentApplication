@@ -45,6 +45,15 @@ public class LessonServices {
         return lessonResponseDto;
     }
 
+    public Long delete(Long lessonId) {
+        Lesson lesson = findLessonByIdOrElseThrowException(lessonId);
+        lessonRepository.delete(lesson);
+        return lesson.getId();
+    }
+
+    public Lesson findLessonByIdOrElseThrowException(Long lessonId) {
+        return lessonRepository.findById(lessonId).orElseThrow();
+    }
 
 
 }

@@ -23,8 +23,14 @@ public class LessonController {
     @PostMapping
     public ResponseEntity<ApiResponse<Object>> addNewLesson(@RequestBody LessonResponseDto lessonResponseDto) {
         return ResponseEntity.ok(new ApiResponse<>(lessonServices.addNewLesson(lessonResponseDto), "succesfully add new lesson"));
-
     }
+
+    @DeleteMapping("/{lessonId}")
+    public ResponseEntity<ApiResponse<Object>> deleteLesson(@PathVariable Long lessonId){
+        return ResponseEntity.ok(new ApiResponse<>(lessonServices.delete(lessonId),"Deleted lesson"));
+    }
+
+
 
 
 }

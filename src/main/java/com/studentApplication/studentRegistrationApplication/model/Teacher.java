@@ -22,7 +22,6 @@ public class Teacher {
     @NotBlank
     private String name;
     @OneToOne
-    @NotBlank
     private Lesson lesson;
 
     public Teacher() {
@@ -62,5 +61,14 @@ public class Teacher {
 
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lesson=" + lesson +
+                '}';
     }
 }

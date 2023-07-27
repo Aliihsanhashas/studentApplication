@@ -20,8 +20,8 @@ public class Lesson {
     private Long id;
     @NotBlank
     private String name;
-    @NotBlank
-    private int credits;
+
+    private int credits = 0;
     @OneToOne
     private Teacher teacher;
 
