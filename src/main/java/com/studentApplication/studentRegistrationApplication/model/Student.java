@@ -38,7 +38,8 @@ public class Student {
     @Email(message = "Email shoul be valid.")
     @NotBlank(message = "Must be not null.")
     private String email;
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+
+    @ManyToMany
     private List<Lesson> lessons = new ArrayList<>();
 
 

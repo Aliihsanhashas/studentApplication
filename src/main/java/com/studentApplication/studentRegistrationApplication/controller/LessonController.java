@@ -1,7 +1,6 @@
 package com.studentApplication.studentRegistrationApplication.controller;
 
-import com.studentApplication.studentRegistrationApplication.dto.LessonResponseDto;
-import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.LessonRequestDto;
 import com.studentApplication.studentRegistrationApplication.service.LessonServices;
 import com.studentApplication.studentRegistrationApplication.util.ApiResponse;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,8 @@ public class LessonController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Object>> addNewLesson(@RequestBody LessonResponseDto lessonResponseDto) {
-        return ResponseEntity.ok(new ApiResponse<>(lessonServices.addNewLesson(lessonResponseDto), "succesfully add new lesson"));
+    public ResponseEntity<ApiResponse<Object>> addNewLesson(@RequestBody LessonRequestDto lessonRequestDto) {
+        return ResponseEntity.ok(new ApiResponse<>(lessonServices.addNewLesson(lessonRequestDto), "succesfully add new lesson"));
     }
 
     @DeleteMapping("/{lessonId}")

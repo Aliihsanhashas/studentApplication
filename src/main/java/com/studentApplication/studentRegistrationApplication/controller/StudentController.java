@@ -1,16 +1,11 @@
 package com.studentApplication.studentRegistrationApplication.controller;
 
-import com.studentApplication.studentRegistrationApplication.dto.LessonResponseDto;
 import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
 import com.studentApplication.studentRegistrationApplication.service.StudentServices;
 import com.studentApplication.studentRegistrationApplication.util.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * @RestController annotasyonu, Spring Boot uygulamasında bir API sunucusu oluşturmak için kullanılan
- * @Controller annotasyonunun özelleştirilmiş bir versiyonudur.
- */
 @RestController
 @RequestMapping(path = "/api/students")
 public class StudentController {
@@ -71,4 +66,14 @@ public class StudentController {
         return ResponseEntity.ok(new ApiResponse<>(studentServices.findByNameOrElseThrowException(name), "student succesfully found."));
     }
 
+    @PostMapping("/post/{lessonId}/{studentId}")
+    public ResponseEntity<ApiResponse<Object>> addLessonForStudent(@PathVariable Long lessonId,
+                                                                   @PathVariable Long studentId) {
+        return ResponseEntity.ok(new ApiResponse<>(studentServices.addLessonForStudent(lessonId, studentId), "add lesson for student."));
+    }
+
+    @GetMapping("/lessons/get/{studentId}")
+    public ResponseEntity<ApiResponse<Object>> getAllLessonForStudent(@PathVariable Long studentId) {
+        return ResponseEntity.ok(new ApiResponse<>(studentServices.getAllLessonForStudent(studentId), "show lesson."));
+    }
 }

@@ -17,8 +17,6 @@ public class StudentResponseDto {
     private String lastName;
     private String email;
 
-    private Set<Lesson> lessons = new HashSet<>();
-
 
     public long getId() {
         return id;
@@ -50,13 +48,5 @@ public class StudentResponseDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Set<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(Set<Lesson> lessons) {
-        this.lessons = lessons;
     }
 }

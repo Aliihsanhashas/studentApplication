@@ -1,6 +1,6 @@
 package com.studentApplication.studentRegistrationApplication.service;
 
-import com.studentApplication.studentRegistrationApplication.dto.LessonResponseDto;
+import com.studentApplication.studentRegistrationApplication.dto.LessonRequestDto;
 import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.repository.LessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,28 +19,28 @@ public class LessonServices {
     }
 
 
-    public Lesson addNewLesson(LessonResponseDto lessonResponseDto) {
+    public Lesson addNewLesson(LessonRequestDto lessonRequestDto) {
         Lesson lesson = new Lesson();
-        lesson.setName(lessonResponseDto.getName());
-        lesson.setCredits(lessonResponseDto.getCredits());
+        lesson.setName(lessonRequestDto.getName());
+        lesson.setCredits(lessonRequestDto.getCredits());
 
         return lessonRepository.save(lesson);
     }
 
-    public List<LessonResponseDto> getLessons() {
+    public List<LessonRequestDto> getLessons() {
         return lessonRepository.findAll().stream()
                 .map(this::getLessonResponseDtoByLesson)
                 .collect(Collectors.toList());
     }
 
-    private LessonResponseDto getLessonResponseDtoByLesson(Lesson lesson) {
-        LessonResponseDto lessonResponseDto = new LessonResponseDto();
+    private LessonRequestDto getLessonResponseDtoByLesson(Lesson lesson) {
+        LessonRequestDto lessonRequestDto = new LessonRequestDto();
 
-        lessonResponseDto.setName(lesson.getName());
-        lessonResponseDto.setCredits(lesson.getCredits());
-        lessonResponseDto.setId(lesson.getId());
+        lessonRequestDto.setName(lesson.getName());
+        lessonRequestDto.setCredits(lesson.getCredits());
+        lessonRequestDto.setId(lesson.getId());
 
-        return lessonResponseDto;
+        return lessonRequestDto;
     }
 
     public Long delete(Long lessonId) {

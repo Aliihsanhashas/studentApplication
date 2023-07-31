@@ -1,9 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.dto;
 
-import com.studentApplication.studentRegistrationApplication.model.Teacher;
 
-
-public class LessonResponseDto {
+public class LessonRequestDto {
     private Long id;
 
     private String name;

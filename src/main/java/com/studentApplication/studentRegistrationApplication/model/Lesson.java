@@ -2,6 +2,8 @@ package com.studentApplication.studentRegistrationApplication.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -21,8 +23,8 @@ public class Lesson {
     @NotBlank
     private String name;
     private int credits = 0;
-    @ManyToOne
-    private Student student;
+    @ManyToMany
+    private List<Student> students = new ArrayList<>();
 
 
     public Lesson() {
@@ -63,12 +65,12 @@ public class Lesson {
         this.credits = credits;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class Lesson {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", credits=" + credits +
-                ", student=" + student +
+                ", students=" + students +
                 '}';
     }
 }

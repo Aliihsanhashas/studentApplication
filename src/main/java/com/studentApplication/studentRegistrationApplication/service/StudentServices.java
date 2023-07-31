@@ -1,6 +1,5 @@
 package com.studentApplication.studentRegistrationApplication.service;
 
-import com.studentApplication.studentRegistrationApplication.dto.LessonResponseDto;
 import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
 import com.studentApplication.studentRegistrationApplication.dto.StudentResponseDto;
 import com.studentApplication.studentRegistrationApplication.exception.StudentNotFoundException;
@@ -10,8 +9,9 @@ import com.studentApplication.studentRegistrationApplication.repository.StudentR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Service annotasyonu, bir sınıfın iş mantığını uygulamak ve işlemleri gerçekleştirmek için kullanılır.
@@ -20,10 +20,12 @@ import java.util.stream.Collectors;
 public class StudentServices {
 
     private final StudentRepository studentRepository;
+    private final LessonServices lessonServices;
 
     @Autowired
-    public StudentServices(StudentRepository studentRepository) {
+    public StudentServices(StudentRepository studentRepository, LessonServices lessonServices) {
         this.studentRepository = studentRepository;
+        this.lessonServices = lessonServices;
     }
 
     public List<StudentResponseDto> getStudents() {   //getAll student
@@ -47,13 +49,10 @@ public class StudentServices {
 
     public Student addNewStudent(StudentRequestDto studentRequestDto) {
         Student student = new Student();
-        Lesson lesson = new Lesson();
 
         student.setName(studentRequestDto.getName());
         student.setLastName(studentRequestDto.getLastName());
         student.setEmail(studentRequestDto.getEmail());
-        student.setLessons(studentRequestDto.getLessons());
-        student.setLessons(lesson.getStudent().getLessons());
 
         return studentRepository.save(student);
     }
@@ -91,4 +90,25 @@ public class StudentServices {
     public Student findByNameOrElseThrowException(String name) {
         return studentRepository.findByName(name).orElseThrow(() -> new StudentNotFoundException("user not found by id: " + name));
     }
+
+    public Student addLessonForStudent(Long lessonId, Long studentId) {
+        Lesson lesson = lessonServices.findLessonByIdOrElseThrowException(lessonId);
+        Student student = this.findStudentByIdOrElseThrowException(studentId);
+        List<Lesson> lessons = student.getLessons();
+        if (lessons == null) {
+            lessons = new ArrayList<>();
+        }
+        lessons.add(lesson);
+        student.setLessons(lessons);
+
+        return studentRepository.save(student);
+    }
+
+    public Student getAllLessonForStudent(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found with id: " + studentId));
+        return student;
+    }
+
+
 }
