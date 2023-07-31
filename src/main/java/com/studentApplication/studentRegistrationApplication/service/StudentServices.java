@@ -1,8 +1,10 @@
 package com.studentApplication.studentRegistrationApplication.service;
 
+import com.studentApplication.studentRegistrationApplication.dto.LessonResponseDto;
 import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
 import com.studentApplication.studentRegistrationApplication.dto.StudentResponseDto;
 import com.studentApplication.studentRegistrationApplication.exception.StudentNotFoundException;
+import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.model.Student;
 import com.studentApplication.studentRegistrationApplication.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +47,13 @@ public class StudentServices {
 
     public Student addNewStudent(StudentRequestDto studentRequestDto) {
         Student student = new Student();
-
+        Lesson lesson = new Lesson();
 
         student.setName(studentRequestDto.getName());
         student.setLastName(studentRequestDto.getLastName());
         student.setEmail(studentRequestDto.getEmail());
+        student.setLessons(studentRequestDto.getLessons());
+        student.setLessons(lesson.getStudent().getLessons());
 
         return studentRepository.save(student);
     }

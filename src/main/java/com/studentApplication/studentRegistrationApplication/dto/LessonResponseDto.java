@@ -10,7 +10,7 @@ public class LessonResponseDto {
 
     private int credits;
 
-    private Teacher teacher;
+
 
     public Long getId() {
         return id;
@@ -34,13 +34,5 @@ public class LessonResponseDto {
 
     public void setCredits(int credits) {
         this.credits = credits;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
     }
 }

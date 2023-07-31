@@ -1,7 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.controller;
 
+import com.studentApplication.studentRegistrationApplication.dto.LessonResponseDto;
 import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
-import com.studentApplication.studentRegistrationApplication.model.Student;
 import com.studentApplication.studentRegistrationApplication.service.StudentServices;
 import com.studentApplication.studentRegistrationApplication.util.ApiResponse;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +43,9 @@ public class StudentController {
 
     @PutMapping("{studentId}")
     public ResponseEntity<ApiResponse<Object>> updateStudent(@PathVariable Long studentId,
-                                                             @RequestParam String name,   // TODO conver to StudentRequestDto
+                                                             @RequestParam String name,
                                                              @RequestParam String lastName,
-                                                             @RequestParam String email) {
+                                                             @RequestParam String email) {// TODO conver to StudentRequestDto
 
         return ResponseEntity.ok(new ApiResponse<>(studentServices.updateStudent(studentId, name, lastName, email), "update student."));
     }

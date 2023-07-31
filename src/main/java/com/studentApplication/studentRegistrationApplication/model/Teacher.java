@@ -21,7 +21,7 @@ public class Teacher {
     private Long id;
     @NotBlank
     private String name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Lesson lesson;
 
     public Teacher() {

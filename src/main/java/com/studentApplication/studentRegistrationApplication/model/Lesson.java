@@ -20,25 +20,23 @@ public class Lesson {
     private Long id;
     @NotBlank
     private String name;
-
     private int credits = 0;
-    @OneToOne
-    private Teacher teacher;
+    @ManyToOne
+    private Student student;
+
 
     public Lesson() {
     }
 
-    public Lesson(String name, int credits, Teacher teacher) {
+    public Lesson(String name, int credits) {
         this.name = name;
         this.credits = credits;
-        this.teacher = teacher;
     }
 
-    public Lesson(Long id, String name, int credits, Teacher teacher) {
+    public Lesson(Long id, String name, int credits) {
         this.id = id;
         this.name = name;
         this.credits = credits;
-        this.teacher = teacher;
     }
 
     public Long getId() {
@@ -65,12 +63,12 @@ public class Lesson {
         this.credits = credits;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override
@@ -79,7 +77,7 @@ public class Lesson {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", credits=" + credits +
-                ", teacher=" + teacher +
+                ", student=" + student +
                 '}';
     }
 }

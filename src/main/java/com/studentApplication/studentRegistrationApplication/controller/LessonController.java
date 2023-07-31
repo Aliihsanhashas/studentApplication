@@ -1,6 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.controller;
 
 import com.studentApplication.studentRegistrationApplication.dto.LessonResponseDto;
+import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
 import com.studentApplication.studentRegistrationApplication.service.LessonServices;
 import com.studentApplication.studentRegistrationApplication.util.ApiResponse;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,5 @@ public class LessonController {
     public ResponseEntity<ApiResponse<Object>> deleteLesson(@PathVariable Long lessonId){
         return ResponseEntity.ok(new ApiResponse<>(lessonServices.delete(lessonId),"Deleted lesson"));
     }
-
-
-
 
 }

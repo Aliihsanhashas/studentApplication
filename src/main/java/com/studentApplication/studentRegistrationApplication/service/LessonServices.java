@@ -23,7 +23,6 @@ public class LessonServices {
         Lesson lesson = new Lesson();
         lesson.setName(lessonResponseDto.getName());
         lesson.setCredits(lessonResponseDto.getCredits());
-        lesson.setTeacher(lessonResponseDto.getTeacher());
 
         return lessonRepository.save(lesson);
     }
@@ -39,7 +38,6 @@ public class LessonServices {
 
         lessonResponseDto.setName(lesson.getName());
         lessonResponseDto.setCredits(lesson.getCredits());
-        lessonResponseDto.setTeacher(lesson.getTeacher());
         lessonResponseDto.setId(lesson.getId());
 
         return lessonResponseDto;

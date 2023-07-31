@@ -1,6 +1,12 @@
 package com.studentApplication.studentRegistrationApplication.dto;
 
+import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.model.Student;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * bu sınıfı student'in hepsini çekmemek icin actık.
@@ -10,6 +16,8 @@ public class StudentResponseDto {
     private String name;
     private String lastName;
     private String email;
+
+    private Set<Lesson> lessons = new HashSet<>();
 
 
     public long getId() {
@@ -42,5 +50,13 @@ public class StudentResponseDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(Set<Lesson> lessons) {
+        this.lessons = lessons;
     }
 }

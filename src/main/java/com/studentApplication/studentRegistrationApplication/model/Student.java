@@ -3,6 +3,10 @@ package com.studentApplication.studentRegistrationApplication.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 //Bir sınıfı @Entity ile işaretlediğinizde, Hibernate bu sınıfı bir veritabanı tablosuna eşleyebilir
 // ve tablo ile nesne arasında bir ilişki kurabilir.
@@ -34,29 +38,34 @@ public class Student {
     @Email(message = "Email shoul be valid.")
     @NotBlank(message = "Must be not null.")
     private String email;
-
-    @ManyToOne
-    private Lesson lesson;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Lesson> lessons = new ArrayList<>();
 
 
     public Student() {
 
     }
 
-    public Student(String name, String lastName, String email, Lesson lesson) {
+    public Student(String name, String lastName, String email) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.lesson = lesson;
 
     }
 
-    public Student(Long id, String name, String lastName, String email, Lesson lesson) {
+    public Student(Long id, String name, String lastName, String email) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.lesson = lesson;
+    }
+
+    public Student(Long id, String name, String lastName, String email, List<Lesson> lessons) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.lessons = lessons;
     }
 
     public Long getId() {
@@ -91,22 +100,22 @@ public class Student {
         this.email = email;
     }
 
-    public Lesson getLesson() {
-        return lesson;
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     @Override
     public String toString() {
-        return "StudentClass{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", lessons=" + lessons +
                 '}';
     }
-
 }
