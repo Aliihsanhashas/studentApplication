@@ -73,7 +73,7 @@ public class StudentController {
     }
 
     @GetMapping("/lessons/get/{studentId}")
-    public ResponseEntity<ApiResponse<Object>> getAllLessonForStudent(@PathVariable Long studentId) {
-        return ResponseEntity.ok(new ApiResponse<>(studentServices.getAllLessonForStudent(studentId), "show lesson."));
+    public ResponseEntity<ApiResponse<Object>> getAllLessonByStudent(@PathVariable Long studentId) {
+        return ResponseEntity.ok(new ApiResponse<>(studentServices.getAllLessonByStudent(studentId), "show lesson."));
     }
 }

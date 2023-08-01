@@ -40,7 +40,9 @@ public class Student {
     private String email;
 
     @ManyToMany
+    @JoinTable
     private List<Lesson> lessons = new ArrayList<>();
+
 
 
     public Student() {
@@ -68,6 +70,7 @@ public class Student {
         this.email = email;
         this.lessons = lessons;
     }
+
 
     public Long getId() {
         return id;
@@ -108,6 +111,7 @@ public class Student {
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
     }
+
 
     @Override
     public String toString() {

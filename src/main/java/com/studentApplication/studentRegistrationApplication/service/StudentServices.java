@@ -104,7 +104,7 @@ public class StudentServices {
         return studentRepository.save(student);
     }
 
-    public Student getAllLessonForStudent(Long studentId) {
+    public Student getAllLessonByStudent(Long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found with id: " + studentId));
         return student;

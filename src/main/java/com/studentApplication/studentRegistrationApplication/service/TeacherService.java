@@ -1,6 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.service;
 
-import com.studentApplication.studentRegistrationApplication.dto.TeacherResponseDto;
+import com.studentApplication.studentRegistrationApplication.dto.TeacherRequestDto;
+import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.model.Teacher;
 import com.studentApplication.studentRegistrationApplication.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,33 +13,36 @@ import java.util.stream.Collectors;
 @Service
 public class TeacherService {
     private final TeacherRepository teacherRepository;
+    private final LessonServices lessonServices;
 
     @Autowired
-    public TeacherService(TeacherRepository teacherRepository) {
+    public TeacherService(TeacherRepository teacherRepository, LessonServices lessonServices) {
         this.teacherRepository = teacherRepository;
+        this.lessonServices = lessonServices;
     }
 
-    public Teacher addNewTeacher(TeacherResponseDto teacherResponseDto) {
+    public Teacher addNewTeacher(TeacherRequestDto teacherRequestDto) {
         Teacher teacher = new Teacher();
 
-        teacher.setName(teacherResponseDto.getName());
-        teacher.setLesson(teacherResponseDto.getLesson());
+        teacher.setName(teacherRequestDto.getName());
+        teacher.setLesson(teacherRequestDto.getLesson());
 
         return teacherRepository.save(teacher);
     }
 
-    public List<TeacherResponseDto> getAllTeacher() {
+    public List<TeacherRequestDto> getAllTeacher() {
         return teacherRepository.findAll().stream()
                 .map(this::getTeacherResponseDtoByTeacher)
                 .collect(Collectors.toList());
     }
 
-    private TeacherResponseDto getTeacherResponseDtoByTeacher(Teacher teacher) {
-        TeacherResponseDto teacherResponseDto = new TeacherResponseDto();
-        teacherResponseDto.setId(teacher.getId());
-        teacherResponseDto.setName(teacher.getName());
-        teacherResponseDto.setLesson(teacher.getLesson());
-        return teacherResponseDto;
+    private TeacherRequestDto getTeacherResponseDtoByTeacher(Teacher teacher) {
+        TeacherRequestDto teacherRequestDto = new TeacherRequestDto();
+        teacherRequestDto.setId(teacher.getId());
+        teacherRequestDto.setName(teacher.getName());
+        teacherRequestDto.setLesson(teacher.getLesson());
+
+        return teacherRequestDto;
     }
 
     public Long deleteTeacher(Long teacherId) {
@@ -50,5 +54,13 @@ public class TeacherService {
     public Teacher findTeacherByIdOrElseThrowException(Long teacherId) {
         return teacherRepository.findById(teacherId).orElseThrow();
 
+    }
+
+    public Teacher addTeacherForLesson(Long lessonId, Long teacherId) {
+        Lesson lesson = lessonServices.findLessonByIdOrElseThrowException(lessonId);
+        Teacher teacher = this.findTeacherByIdOrElseThrowException(teacherId);
+        lesson.setTeacher(teacher);
+
+        return teacherRepository.save(teacher);
     }
 }

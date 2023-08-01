@@ -21,8 +21,10 @@ public class Teacher {
     private Long id;
     @NotBlank
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Lesson lesson;
+
+
 
     public Teacher() {
 
@@ -38,6 +40,7 @@ public class Teacher {
         this.name = name;
         this.lesson = lesson;
     }
+
 
     public Long getId() {
         return id;
@@ -62,6 +65,7 @@ public class Teacher {
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
     }
+
 
     @Override
     public String toString() {

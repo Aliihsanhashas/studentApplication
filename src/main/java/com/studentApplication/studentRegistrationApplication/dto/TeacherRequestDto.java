@@ -3,12 +3,13 @@ package com.studentApplication.studentRegistrationApplication.dto;
 import com.studentApplication.studentRegistrationApplication.model.Lesson;
 
 
-public class TeacherResponseDto {
+public class TeacherRequestDto {
     private Long id;
 
     private String name;
 
     private Lesson lesson;
+
 
     public Long getId() {
         return id;
@@ -33,4 +34,5 @@ public class TeacherResponseDto {
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
     }
+
 }

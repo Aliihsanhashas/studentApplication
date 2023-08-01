@@ -24,7 +24,12 @@ public class Lesson {
     private String name;
     private int credits = 0;
     @ManyToMany
+    @JoinTable
     private List<Student> students = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 
 
     public Lesson() {
@@ -71,6 +76,14 @@ public class Lesson {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     @Override
