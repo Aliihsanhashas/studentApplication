@@ -39,10 +39,8 @@ public class Student {
     @NotBlank(message = "Must be not null.")
     private String email;
 
-    @ManyToMany
-    @JoinTable
+    @OneToMany
     private List<Lesson> lessons = new ArrayList<>();
-
 
 
     public Student() {

@@ -22,6 +22,7 @@ public class Teacher {
     @NotBlank
     private String name;
     @OneToOne
+    @JoinColumn(name = "lesson_id")
     private Lesson lesson;
 
 

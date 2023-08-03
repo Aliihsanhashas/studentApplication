@@ -23,12 +23,11 @@ public class Lesson {
     @NotBlank
     private String name;
     private int credits = 0;
-    @ManyToMany
-    @JoinTable
-    private List<Student> students = new ArrayList<>();
+
+    @ManyToOne
+    private Student students;
 
     @OneToOne
-    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
 
@@ -70,11 +69,11 @@ public class Lesson {
         this.credits = credits;
     }
 
-    public List<Student> getStudents() {
+    public Student getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Student students) {
         this.students = students;
     }
 
