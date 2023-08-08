@@ -1,7 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.service;
 
-import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
-import com.studentApplication.studentRegistrationApplication.dto.StudentResponseDto;
+import com.studentApplication.studentRegistrationApplication.dto.student.StudentRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.student.StudentResponseDto;
 import com.studentApplication.studentRegistrationApplication.exception.StudentNotFoundException;
 import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.model.Student;
@@ -104,11 +104,9 @@ public class StudentServices {
         return studentRepository.save(student);
     }
 
-    public Student getAllLessonByStudent(Long studentId) {
-        Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new EntityNotFoundException("Student not found with id: " + studentId));
-        return student;
+    public List<Lesson> getAllLessonByStudent(Long studentId) {
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found with id: " + studentId)).getLessons();
     }
-
 
 }

@@ -1,6 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.service;
 
-import com.studentApplication.studentRegistrationApplication.dto.LessonRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.lesson.LessonRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.lesson.LessonResponseDto;
 import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.repository.LessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +28,20 @@ public class LessonServices {
         return lessonRepository.save(lesson);
     }
 
-    public List<LessonRequestDto> getLessons() {
+    public List<LessonResponseDto> getLessons() {
         return lessonRepository.findAll().stream()
                 .map(this::getLessonResponseDtoByLesson)
                 .collect(Collectors.toList());
     }
 
-    private LessonRequestDto getLessonResponseDtoByLesson(Lesson lesson) {
-        LessonRequestDto lessonRequestDto = new LessonRequestDto();
+    private LessonResponseDto getLessonResponseDtoByLesson(Lesson lesson) {
+        LessonResponseDto lessonResponseDto = new LessonResponseDto();
 
-        lessonRequestDto.setName(lesson.getName());
-        lessonRequestDto.setCredits(lesson.getCredits());
-        lessonRequestDto.setId(lesson.getId());
+        lessonResponseDto.setId(lesson.getId());
+        lessonResponseDto.setName(lesson.getName());
+        lessonResponseDto.setCredits(lesson.getCredits());
 
-        return lessonRequestDto;
+        return lessonResponseDto;
     }
 
     public Long delete(Long lessonId) {
@@ -52,6 +53,5 @@ public class LessonServices {
     public Lesson findLessonByIdOrElseThrowException(Long lessonId) {
         return lessonRepository.findById(lessonId).orElseThrow();
     }
-
 
 }

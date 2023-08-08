@@ -1,6 +1,7 @@
 package com.studentApplication.studentRegistrationApplication.service;
 
-import com.studentApplication.studentRegistrationApplication.dto.TeacherRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.teacher.TeacherRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.teacher.TeacherResponseDto;
 import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.model.Teacher;
 import com.studentApplication.studentRegistrationApplication.repository.TeacherRepository;
@@ -30,19 +31,19 @@ public class TeacherService {
         return teacherRepository.save(teacher);
     }
 
-    public List<TeacherRequestDto> getAllTeacher() {
+    public List<TeacherResponseDto> getAllTeacher() {
         return teacherRepository.findAll().stream()
                 .map(this::getTeacherResponseDtoByTeacher)
                 .collect(Collectors.toList());
     }
 
-    private TeacherRequestDto getTeacherResponseDtoByTeacher(Teacher teacher) {
-        TeacherRequestDto teacherRequestDto = new TeacherRequestDto();
-        teacherRequestDto.setId(teacher.getId());
-        teacherRequestDto.setName(teacher.getName());
-        teacherRequestDto.setLesson(teacher.getLesson());
+    private TeacherResponseDto getTeacherResponseDtoByTeacher(Teacher teacher) {
+        TeacherResponseDto teacherResponseDto = new TeacherResponseDto();
+        teacherResponseDto.setId(teacher.getId());
+        teacherResponseDto.setName(teacher.getName());
+        teacherResponseDto.setLesson(teacher.getLesson());
 
-        return teacherRequestDto;
+        return teacherResponseDto;
     }
 
     public Long deleteTeacher(Long teacherId) {
@@ -59,7 +60,7 @@ public class TeacherService {
     public Teacher addTeacherForLesson(Long lessonId, Long teacherId) {
         Lesson lesson = lessonServices.findLessonByIdOrElseThrowException(lessonId);
         Teacher teacher = this.findTeacherByIdOrElseThrowException(teacherId);
-        lesson.setTeacher(teacher);
+        teacher.setLesson(lesson);
 
         return teacherRepository.save(teacher);
     }

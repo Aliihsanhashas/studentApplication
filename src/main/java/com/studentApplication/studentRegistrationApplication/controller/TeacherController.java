@@ -1,6 +1,6 @@
 package com.studentApplication.studentRegistrationApplication.controller;
 
-import com.studentApplication.studentRegistrationApplication.dto.TeacherRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.teacher.TeacherRequestDto;
 import com.studentApplication.studentRegistrationApplication.service.TeacherService;
 import com.studentApplication.studentRegistrationApplication.util.ApiResponse;
 import org.springframework.http.ResponseEntity;

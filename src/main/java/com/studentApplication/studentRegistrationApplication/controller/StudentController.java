@@ -1,6 +1,6 @@
 package com.studentApplication.studentRegistrationApplication.controller;
 
-import com.studentApplication.studentRegistrationApplication.dto.StudentRequestDto;
+import com.studentApplication.studentRegistrationApplication.dto.student.StudentRequestDto;
 import com.studentApplication.studentRegistrationApplication.service.StudentServices;
 import com.studentApplication.studentRegistrationApplication.util.ApiResponse;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +40,7 @@ public class StudentController {
     public ResponseEntity<ApiResponse<Object>> updateStudent(@PathVariable Long studentId,
                                                              @RequestParam String name,
                                                              @RequestParam String lastName,
-                                                             @RequestParam String email) {// TODO conver to StudentRequestDto
+                                                             @RequestParam String email) {// TODO convert to StudentRequestDto
 
         return ResponseEntity.ok(new ApiResponse<>(studentServices.updateStudent(studentId, name, lastName, email), "update student."));
     }
@@ -50,29 +50,29 @@ public class StudentController {
         return ResponseEntity.ok(new ApiResponse<>(studentServices.deleteStudent(studentId), "student deleted."));
     }
 
-    @GetMapping("/get/lastname/{lastName}")
+    @GetMapping("/lastname/{lastName}")
     public ResponseEntity<ApiResponse<Object>> findByLastName(@PathVariable String lastName) {
 
         return ResponseEntity.ok(new ApiResponse<>(studentServices.findByLastNameOrElseThrowException(lastName), "student successfully found."));
     }
 
-    @GetMapping("/get/email/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<ApiResponse<Object>> findByEmail(@PathVariable String email) {
         return ResponseEntity.ok(new ApiResponse<>(studentServices.findByEmailOrElseThrowException(email), "student successfully found."));
     }
 
-    @GetMapping("/get/name/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<ApiResponse<Object>> findByName(@PathVariable String name) {
         return ResponseEntity.ok(new ApiResponse<>(studentServices.findByNameOrElseThrowException(name), "student succesfully found."));
     }
 
-    @PostMapping("/post/{lessonId}/{studentId}")
+    @PostMapping("/{lessonId}/{studentId}")
     public ResponseEntity<ApiResponse<Object>> addLessonForStudent(@PathVariable Long lessonId,
                                                                    @PathVariable Long studentId) {
         return ResponseEntity.ok(new ApiResponse<>(studentServices.addLessonForStudent(lessonId, studentId), "add lesson for student."));
     }
 
-    @GetMapping("/lessons/get/{studentId}")
+    @GetMapping("/{studentId}/lesson")
     public ResponseEntity<ApiResponse<Object>> getAllLessonByStudent(@PathVariable Long studentId) {
         return ResponseEntity.ok(new ApiResponse<>(studentServices.getAllLessonByStudent(studentId), "show lesson."));
     }

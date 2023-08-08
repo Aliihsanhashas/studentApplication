@@ -39,7 +39,7 @@ public class Student {
     @NotBlank(message = "Must be not null.")
     private String email;
 
-    @OneToMany
+    @OneToMany()
     private List<Lesson> lessons = new ArrayList<>();
 
 

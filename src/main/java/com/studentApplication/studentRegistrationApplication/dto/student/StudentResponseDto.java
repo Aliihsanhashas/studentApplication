@@ -1,4 +1,4 @@
-package com.studentApplication.studentRegistrationApplication.dto;
+package com.studentApplication.studentRegistrationApplication.dto.student;
 
 import com.studentApplication.studentRegistrationApplication.model.Lesson;
 import com.studentApplication.studentRegistrationApplication.model.Student;

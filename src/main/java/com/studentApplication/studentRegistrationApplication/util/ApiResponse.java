@@ -8,7 +8,6 @@ public class ApiResponse<T> {
     private Long timestamp = new Date().getTime();;
     private String message;
 
-
     public ApiResponse() {
     }
 
