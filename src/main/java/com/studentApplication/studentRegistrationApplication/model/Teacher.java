@@ -2,7 +2,6 @@ package com.studentApplication.studentRegistrationApplication.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -22,9 +21,7 @@ public class Teacher {
     @NotBlank
     private String name;
     @OneToOne
-    @JoinColumn(name = "lesson_id")
     private Lesson lesson;
-
 
 
     public Teacher() {

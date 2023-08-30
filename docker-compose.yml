@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  app:
+    container_name: springboot-postgresql
+    image: springboot-postgresql
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresqldb:5432/studentdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 314159
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+  postgresqldb:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=314159
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=studentdb

@@ -1,6 +1,12 @@
-FROM openjdk:11
+# Build stage
+FROM openjdk:11-jdk-slim AS build
 WORKDIR /app
-ENV PORT 8080
+COPY . .
+RUN ./mvnw -DskipTests clean package
+
+# Final stage
+FROM openjdk:11-jre-slim
+WORKDIR /app
+COPY --from=build /app/target/studentRegistrationApplication-0.0.1-SNAPSHOT.jar ./app.jar
 EXPOSE 8080
-ADD target/studentRegistrationApplication-0.0.1-SNAPSHOT.jar studentRegistrationApplication-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java", "-jar", "studentRegistrationApplication-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
